@@ -1,0 +1,103 @@
+<head>
+   <script crossorigin="anonymous" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+   <!-- Google AdSense Using Machine Learning Code -->
+   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+         google_ad_client: "ca-pub-3071098372371409",
+         enable_page_level_ads: true
+      });
+   </script>
+   <style>
+      pre {
+         white-space: pre-wrap;
+         white-space: -moz-pre-wrap;
+         white-space: -pre-wrap;
+         white-space: -o-pre-wrap;
+         word-wrap: break-word;
+      }
+
+      .dot {
+         height: 12px;
+         width: 12px;
+         background-color: #bbb;
+         border-radius: 50%;
+         display: inline-block;
+      }
+
+      .arrow {
+         border: solid black;
+         border-width: 0 3px 3px 0;
+         display: inline-block;
+         padding: 3px;
+      }
+
+      .right {
+         transform: rotate(-45deg);
+         -webkit-transform: rotate(-45deg);
+      }
+
+      .left {
+         transform: rotate(135deg);
+         -webkit-transform: rotate(135deg);
+      }
+
+      .up {
+         transform: rotate(-135deg);
+         -webkit-transform: rotate(-135deg);
+      }
+
+      .down {
+         transform: rotate(45deg);
+         -webkit-transform: rotate(45deg);
+      }
+
+      .ib {
+         color: blue
+      }
+
+      .ig {
+         color: green
+      }
+
+      .ir {
+         color: red
+      }
+   </style>
+</head>
+<!-- End of 'Personal Posts Menu Template For Copy-Paste'. It started from the top of the page from <HEAD> tag. -->
+
+<pre><h1>Question</h1>
+Update JSON-like object that contains new lines and comments.
+
+I'm working on a Node application where I make a call to external API. I receive a response which looks exactly like this:
+
+{
+   "data": "{\r\n    // comment\r\n    someProperty: '*',\r\n\r\n    // another comment\r\n    method: function(e) {\r\n        if (e.name === 'something') {\r\n            onSomething();\r\n        }\r\n    }\r\n}"
+}
+
+So as you can see it contains some comments, new line characters etc.
+
+I would like parse it somehow to a proper JSON and then update the method property with completely different function. What would be the best (working) way to achieve it? I've tried to use comment-json npm package, however it fails when I execute parse(response.data).
+
+<h1>Answer</h1>
+
+&lt;script>
+function get_response() {     return JSON.stringify({         "data": "{\r\n    // comment\r\n    someProperty: '*',\r\n\r\n    // another comment\r\n    method: function(e) {\r\n        if (e.name === 'something') {\r\n            onSomething();\r\n        }\r\n    }\r\n}"     }); }
+
+var resp = get_response()
+
+console.log("Response before formatting: " + resp);
+
+resp = resp.replace(/\/.*?\\r\\n/g, "");
+resp = resp.replace(/\\r\\n/g, "");
+
+console.log("Response after formatting: " + resp);
+
+console.log("And JSON.parse()")
+console.log(JSON.parse(resp))
+&lt;/script>
+</pre>
+<span style="display: none">Tags: Technology,JavaScript,</span>

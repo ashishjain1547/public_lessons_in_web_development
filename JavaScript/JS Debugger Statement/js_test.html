@@ -1,0 +1,15 @@
+<script>
+function outer(){
+	console.log("From outer")
+	inner()
+} 
+
+function inner(){
+	debugger;
+	console.log("From inner")
+	alert("Bye")
+}
+</script>
+
+<body onload="outer()"> </body>
+

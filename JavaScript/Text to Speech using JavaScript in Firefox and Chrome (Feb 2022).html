@@ -1,0 +1,230 @@
+<head>
+    <script crossorigin="anonymous" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <!-- Google AdSense Using Machine Learning Code -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3071098372371409",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <style>
+        pre {
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+
+        i.ib {
+            color: blue;
+        }
+
+        i.ig {
+            color: green;
+        }
+
+        .customOl {
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="window.speechSynthesis.speak(msg)">Hello World</button>
+
+    <p>
+        Your voice:
+        <select data-bind="options: availableVoices,
+                       optionsText: 'voiceName',
+                       value: selectedVoice,
+                       optionsCaption: 'Choose...',
+                       event:{ change: speakWithNewVoice}"></select>
+    </p>
+
+    <div data-bind="visible: selectedVoice">
+        <!-- Appears when you select something -->
+        You have chosen the voice:
+        <span data-bind="text:selectedVoice() ? selectedVoice().voiceName : 'unknown'"></span>.
+        <br>
+        Voice URI: <span data-bind="text:voiceURI() ? voiceURI() : 'unknown'"></span>
+
+    </div>
+
+    <pre>
+Firefox 97.0.1 (64-bit) -- Default Voice: Female
+Chrome 98.0.4758.102 (Official Build) (64-bit) -- Default Voice: Male    
+    </pre>
+    <h2>All The Available Voices in Firefox</h2>
+    <pre>
+>>> window.speechSynthesis.getVoices()
+
+Array [ SpeechSynthesisVoice, SpeechSynthesisVoice ]
+​
+0: SpeechSynthesisVoice { voiceURI: "urn:moz-tts:sapi:Microsoft David Desktop - English (United States)?en-US", name: "Microsoft David Desktop - English (United States)", lang: "en-US", … }
+​
+1: SpeechSynthesisVoice { voiceURI: "urn:moz-tts:sapi:Microsoft Zira Desktop - English (United States)?en-US", name: "Microsoft Zira Desktop - English (United States)", lang: "en-US", … }
+​
+length: 2
+​
+&lt;prototype>: Array []
+    </pre>
+    <h2>All The Available Voices in Chrome</h2>
+    <pre>
+>>> window.speechSynthesis.getVoices()
+
+(22) [SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice, SpeechSynthesisVoice]
+
+0: SpeechSynthesisVoice {voiceURI: 'Microsoft David - English (United States)', name: 'Microsoft David - English (United States)', lang: 'en-US', localService: true, default: true}
+1: SpeechSynthesisVoice {voiceURI: 'Microsoft Mark - English (United States)', name: 'Microsoft Mark - English (United States)', lang: 'en-US', localService: true, default: false}
+2: SpeechSynthesisVoice {voiceURI: 'Microsoft Zira - English (United States)', name: 'Microsoft Zira - English (United States)', lang: 'en-US', localService: true, default: false}
+3: SpeechSynthesisVoice {voiceURI: 'Google Deutsch', name: 'Google Deutsch', lang: 'de-DE', localService: false, default: false}
+4: SpeechSynthesisVoice {voiceURI: 'Google US English', name: 'Google US English', lang: 'en-US', localService: false, default: false}
+5: SpeechSynthesisVoice {voiceURI: 'Google UK English Female', name: 'Google UK English Female', lang: 'en-GB', localService: false, default: false}
+6: SpeechSynthesisVoice {voiceURI: 'Google UK English Male', name: 'Google UK English Male', lang: 'en-GB', localService: false, default: false}
+7: SpeechSynthesisVoice {voiceURI: 'Google español', name: 'Google español', lang: 'es-ES', localService: false, default: false}
+8: SpeechSynthesisVoice {voiceURI: 'Google español de Estados Unidos', name: 'Google español de Estados Unidos', lang: 'es-US', localService: false, default: false}
+9: SpeechSynthesisVoice {voiceURI: 'Google français', name: 'Google français', lang: 'fr-FR', localService: false, default: false}
+10: SpeechSynthesisVoice {voiceURI: 'Google हिन्दी', name: 'Google हिन्दी', lang: 'hi-IN', localService: false, default: false}
+11: SpeechSynthesisVoice {voiceURI: 'Google Bahasa Indonesia', name: 'Google Bahasa Indonesia', lang: 'id-ID', localService: false, default: false}
+12: SpeechSynthesisVoice {voiceURI: 'Google italiano', name: 'Google italiano', lang: 'it-IT', localService: false, default: false}
+13: SpeechSynthesisVoice {voiceURI: 'Google 日本語', name: 'Google 日本語', lang: 'ja-JP', localService: false, default: false}
+14: SpeechSynthesisVoice {voiceURI: 'Google 한국의', name: 'Google 한국의', lang: 'ko-KR', localService: false, default: false}
+15: SpeechSynthesisVoice {voiceURI: 'Google Nederlands', name: 'Google Nederlands', lang: 'nl-NL', localService: false, default: false}
+16: SpeechSynthesisVoice {voiceURI: 'Google polski', name: 'Google polski', lang: 'pl-PL', localService: false, default: false}
+17: SpeechSynthesisVoice {voiceURI: 'Google português do Brasil', name: 'Google português do Brasil', lang: 'pt-BR', localService: false, default: false}
+18: SpeechSynthesisVoice {voiceURI: 'Google русский', name: 'Google русский', lang: 'ru-RU', localService: false, default: false}
+19: SpeechSynthesisVoice {voiceURI: 'Google 普通话（中国大陆）', name: 'Google 普通话（中国大陆）', lang: 'zh-CN', localService: false, default: false}
+20: SpeechSynthesisVoice {voiceURI: 'Google 粤語（香港）', name: 'Google 粤語（香港）', lang: 'zh-HK', localService: false, default: false}
+21: SpeechSynthesisVoice {voiceURI: 'Google 國語（臺灣）', name: 'Google 國語（臺灣）', lang: 'zh-TW', localService: false, default: false}
+length: 22
+[[Prototype]]: Array(0)
+    </pre>
+    <h2>Error Messages From Knockout</h2>
+
+    <pre>
+1#
+Uncaught Error: ko.applyBindings: could not find document.body; has the document been loaded?
+uc https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:84
+&lt;anonymous> file:///C:/Users/Ashish Jain/OneDrive/Desktop/Twinkle Twinkle, Little Star (Word by Word Reading).html:81
+
+2#
+Uncaught TypeError: Unable to process binding "text: function(){return selectedVoice().voiceName }"
+Message: selectedVoice() is undefined
+    text https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js line 74 > Function:3
+    update https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:110
+    q https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:79
+    xd https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:55
+    yd https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:55
+    ha https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:54
+    $ https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:52
+    q https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:79
+    C https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:11
+    q https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:78
+    l https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:76
+    m https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:76
+    l https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:76
+    m https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:76
+    l https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:76
+    uc https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js:85
+    &lt;anonymous> file:///C:/Users/Ashish Jain/OneDrive/Desktop/Twinkle Twinkle, Little Star (Word by Word Reading).html:111
+
+<b>Message appears in console when page loads the first time, no issues in the page functionality.</b>
+
+This line produces the above error:
+&lt;span data-bind="text: selectedVoice().voiceName">&lt;/span>
+&lt;span data-bind="text:selectedVoice() ? selectedVoice().voiceIx : 'unknown'">&lt;/span>.
+
+</pre>
+
+</body>
+
+<script>
+    var msg = new SpeechSynthesisUtterance();
+    msg.text = "Hello World";
+
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[1];
+
+    msg.volume = 1; // From 0 to 1
+    msg.rate = 1; // From 0.1 to 10
+    msg.pitch = 2; // From 0 to 2
+
+    // msg.text = "Como estas Joel";
+    // msg.lang = 'es';
+
+    window.speechSynthesis.speak(msg);
+
+
+    // Constructor for an object with two properties
+    var Voice = function (name, ix) {
+        this.voiceName = name;
+        this.voiceIx = ix;
+    };
+
+    var viewModel = function () {
+        availableVoices = ko.observableArray([
+            new Voice("Alpha", 0),
+            new Voice("Beta", 1),
+            new Voice("Gamma", 2),
+            new Voice("Delta", 3),
+            new Voice("Epsilon", 4),
+            new Voice("Zeta", 5),
+            new Voice("Eta", 6),
+            new Voice("Theta", 7),
+            new Voice("Iota", 8),
+            new Voice("Kappa", 9),
+            new Voice("Lambda", 10),
+            new Voice("Mu", 11),
+            new Voice("Nu", 12),
+            new Voice("Xi", 13),
+            new Voice("Omicron", 14),
+            new Voice("PI", 15),
+            new Voice("Rho", 16),
+            new Voice("Sigma", 17),
+            new Voice("Tau", 18),
+            new Voice("Upsilon", 19),
+            new Voice("Phi", 20),
+            new Voice("Chi", 21),
+            new Voice("Psi", 22)
+        ]);
+
+        var isFirefox = typeof InstallTrigger !== 'undefined';
+        if (isFirefox) {
+            // Working in Firefox, but not in Chrome
+            availableVoices(availableVoices().slice(0, window.speechSynthesis.getVoices().length));
+
+            // Changing to splice() as given in Knockout Docs.
+            //availableVoices(availableVoices().splice(0, window.speechSynthesis.getVoices().length));
+        }
+
+        selectedVoice = ko.observable(new Voice("", -1)); // Nothing selected by default
+        voiceURI = ko.observable("");
+
+        speakWithNewVoice = function () {
+            var msg = new SpeechSynthesisUtterance();
+            msg.voice = window.speechSynthesis.getVoices()[this.selectedVoice().voiceIx];
+            msg.text = "This is my new voice."; // All 10 voices are same in Firefox and Chrome.
+
+            window.speechSynthesis.speak(msg);
+            if (msg.voice) {
+                this.voiceURI(msg.voice['voiceURI']);
+            }
+            else {
+                this.voiceURI("Not Available. Setting to Default.");
+            }
+
+
+            console.log("voiceIx:", msg.voice, this.selectedVoice().voiceIx);
+
+        }
+    };
+
+    ko.applyBindings(viewModel);
+</script>
+<span style="display: none;">Tags: Web Development,JavaScript,Technology,</span>

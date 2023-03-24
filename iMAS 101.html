@@ -1,0 +1,653 @@
+<head>
+    <style>
+        .customSection {
+            padding-top: 2.5px;
+            padding-bottom: 2.5px;
+            border-bottom: 1px solid black;
+        }
+
+        .customSection pre {
+            white-space: pre-wrap;
+        }
+
+        .customH1 {
+            color: #000000;
+        }
+
+        .customH2 {
+            color: #555555;
+        }
+
+        img {
+            max-width: 580px;
+        }
+
+        /* Blogger Classes and IDs - Begins */
+
+        /*#sidebar-right-1 .widget:not(.widget.AdSense){*/
+
+        /* To hide the sidebar-right containing ads, previous posts, links.
+        #sidebar-right-1 {
+            display: none;
+        }
+        */
+
+        /* To hide the 'Survival' header.
+        #header-inner {
+            display: none;
+        }
+        */
+
+        /* Blogger Classes and IDs - Ends */
+    </style>
+</head>
+<div dir="ltr" style="text-align: left;" trbidi="on">
+    <div class="customSection">
+        <h1 class="customH1">Reading the iMAS log file.</h1>
+        A line in iMAS log looks like this:
+        <code>"Wed May 27|14:07:08.031|D|http-1024-1|Creating a new session|iMASLite|processRequest|85"</code>
+        <br />
+        <br /> What is the meaning of the last digit in this pattern seen in log file?
+        <br />
+        <span style="white-space: pre;"> </span>Sat May 23|12:41:54.890|D|http-1024-1|
+        <br />
+        <span style="white-space: pre;"> </span>Sat May 23|12:41:54.890|D|http-1024-3|
+        <br />
+        <span style="white-space: pre;"> </span>Sat May 23|12:41:54.890|D|http-1024-4|
+        <br /> Answer: "http-1024-4" identifies a thread running on the level of Tomcat in the very early stages of iMAS start
+        up.
+        <br /> _____________________________________________________________________________
+        <br />
+        <br />
+        <span style="white-space: pre;"> </span>'D' is the logger severity 'Debug'. (A: Always, I: Info, E: Error, W: warning)
+        <br />
+        <br />
+        <span style="white-space: pre;"> </span>'1024' is port on which you have Imas running (port for http requests).
+        <br />
+        <br />
+        <span style="white-space: pre;"> </span>Last digit is thread number. Thread '1' is performing one task and while running, it is printing its log.
+        <br />
+        <br /> This is sometimes a thread running on the server:
+        <br />
+        <span style="white-space: pre;"> </span>Wed May 27|10:38:04.437|D|main|
+        <br />
+        <span style="white-space: pre;"> </span>Wed May 27|14:38:18.703|D|ContainerBackgroundProcessor[StandardEngine[Catalina]]|
+        <br />
+        <br /> A log statement from iMAS running in Tomcat 8:
+        <br />
+        <span style="white-space: pre;"> </span>Wed Dec 06|10:00:53.546|I|localhost-startStop-1|SNMP agent initialized with port number [16002]. Trap version
+        [1]. Managing station [172.16.129.35:162] Heartbeat Trap [4] Heartbeat Period [0] Resync Trap [5] Minimum Resync
+        Interval [15000]|com.uws.snmp.SNMPAgent2|initInstance|843
+        <br />
+        <span style="white-space: pre;"> </span>...
+        <br />
+        <span style="white-space: pre;"> </span>Wed Dec 06|10:03:19.441|D|http-nio-8080-exec-1|Application 'Authenticator' is running with language: en|com.uws.infra.SessionContextFrameWork|getUserLanguage|1562
+        <br /> _____________________________________________________________________________
+        <br />
+        <br />
+        <br /> Wed May 27|14:07:08.031|D|http-1024-1|Creating a new session|iMASLite|processRequest|85
+        <br />
+        <br /> Here,
+        <br />
+        <span style="white-space: pre;"> </span>"Creating a new session" : Message
+        <br />
+        <span style="white-space: pre;"> </span>"iMASLite" : Class path
+        <br />
+        <span style="white-space: pre;"> </span>"processRequest" : Method
+        <br />
+        <span style="white-space: pre;"> </span>"85" : Line number
+        <br /> _____________________________________________________________________________
+        <br />
+        <br /> REFERENCES OF SCREEN IN THE LOG FILE:
+        <br />
+        <br /> Wed Jun 10|16:11:10.325|D|http-9999-1|Invoking com.imas.app.generic.GenericApplication::defaultRequestHandler()|com.imas.app.AppFramework|onRequestIn|456
+        <br /> Wed Jun 10|16:11:10.325|D|http-9999-1|SCREEN NAME = [old_cc] VALUE = [].|com.imas.app.generic.GenericApplication|createUserData|329
+        <br /> ...
+        <br /> Wed Jun 10|16:11:13.195|A|http-9999-1|Process = [showeditntsettings] is requested from the client.|com.imas.app.generic.GenericApplication|defaultRequestHandler|532
+        <br />
+        <br />
+        <br /> ...screen.put(): Omitting value bcs of NULL...
+        <br /> Wed Jun 10|16:11:11.675|D|http-9999-1|Copying the screen contents to __in variable.|com.imas.app.generic.parser.Screen|execute|129
+        <br /> Wed Jun 10|16:11:11.675|D|http-9999-1|[SCREEN] NAME = [old_cc] VALUE = [].|com.imas.app.generic.parser.Screen|execute|145
+        <br /> ...
+        <br /> Wed Jun 10|16:11:11.685|D|http-9999-1|Putting the __in variable in the SCREEN object with [84] entries.|com.imas.app.generic.parser.Screen|execute|156
+
+    </div>
+    <div class="customSection">
+        <h1 class="customH1">Fetching GUI application folders from Solaris archive format.</h1>
+        <span>
+            <span>Procedure to fetch GUI application folders from a Solaris package.</span>
+            <span>Please check following procedures. For this you need one Solaris machine.</span>
+            <br />
+            <br /> DOWNLOAD THE APPS.PKG.GZ FROM THE RELEASE MGMT SITE:
+            <code>http://172.16.131.27:9090/release-X86/pkgNEW/</code>
+            <br />This will be in .gz format. So extract it and you will get .pkg file. Take this .pkg file to your folder in Solaris
+            machine. Then use this command:
+            <br /> &emsp;
+            <code>pkgtrans RWAR-***FILENAME***.pkg .</code>
+            <br />
+            <span>Now you will get a folder structure.</span>
+            <span>Inside which you will get app.zip file for specific product. </span>
+            <span>Every product has its different name for app.zip file. For NTR its ntrapps.zip. </span>
+            <span>After extracting this zip file you can see all GUI application folders for this product.</span>
+
+            <br /> Copy and paste them in $ROAMWARE_HOME/roamwaresds/runtime/webapps folder. Now, restart Tomcat and check.
+            <br /> ****************************************************************************************
+            <br />
+            <span>Use WinSCP to copy-paste folders to-and-fro Solaris.</span>
+            <span>After transferring the files using WinSCP. Use puTTY to run the commands:</span>
+            <br /> &emsp;
+            <code>ls -lart</code>
+            <br /> #Go to the folder with the .GZ file and run the command given below:
+            <br /> #TO EXTRACT .PKG FILE FROM .GZ ARCHIVE FORMAT:
+            <br /> &emsp;
+            <code>gzip -d RWARMMServiceAPPS-1.0-Q150604-sol9ORsol10-oci9ORoci10g-i386.pkg.gz</code>
+            <br />
+            <br /> #THEN
+            <br /> &emsp;
+            <code>pkgtrans RWARMMServiceAPPS-1.0-Q150604-sol9ORsol10-oci9ORoci10g-i386.pkg .</code>
+            <br />
+        </span>
+    </div>
+
+    <div class="customSection">
+        <h1 class="customH1">Quick Solaris commands for starting/stopping iMAS/Tomcat server.</h1>
+        1. Output the 'setup environment' file:
+        <br />
+        <code>
+		cat /dev-1/ashish/RoamwareDeploy/scripts/setup_tomcat8.sh<br />
+			#!/usr/bin/bash<br />
+			export ROAMWARE_HOME=/dev-1/ashish/RoamwareDeploy<br />
+			export CATALINA_HOME=/dev-1/ashish/RoamwareDeploy/admin/jakarta-tomcat-8.0.35<br />
+			export JAVA_HOME=/opt/jdk1.7.0_21<br />
+			export PATH=$JAVA_HOME/bin:$PATH<br />
+        </code>
+        <br /> 2. Setting up environment:
+        <code> source /dev-1/ashish/RoamwareDeploy/scripts/setup_tomcat8.sh </code>
+        <br />
+        <br /> 3. Stopping Tomcat:
+        <code> /dev-1/ashish/RoamwareDeploy/admin/jakarta-tomcat-8.0.35/bin/catalina.sh stop </code>
+        <br />
+        <br /> 4. Starting Tomcat:
+        <code> nohup /dev-1/ashish/RoamwareDeploy/admin/jakarta-tomcat-8.0.35/bin/catalina.sh run & </code>
+        <br />
+        <br /> 5. Reading Catalina logs:
+        <br />
+        <code> grep http /dev-1/ashish/RoamwareDeploy/admin/jakarta-tomcat-8.0.35/logs/* </code>
+        <br />
+        <br /> Output:
+        <br />
+        <code> ./jakarta-tomcat-8.0.35/logs/catalina.2017-12-01.log:01-Dec-2017 10:01:18.485 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8385"] </code>
+        <br />
+        <br /> 6. Reading iMAS logs:
+        <br />
+        <code>
+		tail -f /dev-1/ashish/RoamwareDeploy/logs/iMAS/imas.log<br />
+        cat /dev-1/ashish/RoamwareDeploy/logs/iMAS/imas.log<br />
+        </code>
+        <br />7. Finding different versions of JDK
+        <br />
+        <code>
+		which java<br />
+			/opt/jdk1.7.0_21/bin/java<br />
+		find /opt -name jdk*8<br />
+			...<br />
+			find: cannot read dir /opt/oracle/product/11.2.0/client32/cfgtoollogs/cfgfw/: Permission denied<br />
+            /opt/jdk1.8.0_92<br />
+    </code>
+        <br />8. Changing ports (like SNMP, TCP Acceptor) in 'imaslight.properties' file:
+        <br />
+        <code>
+		vim /dev-1/ashish/RoamwareDeploy/admin/jakarta-tomcat-8.0.35/webapps/ROOT/imaslight.properties<br />
+		vi /dev-1/ashish/RoamwareDeploy/admin/jakarta-tomcat-8.0.35/webapps/ROOT/imaslight.properties<br />
+		(Both vim and vi are correct.)<br />
+	</code> a. For search, enter search mode by typing "/" followed by search string.
+        <br /> To find "16001", type "/16001". Enter.
+        <br /> b. For editing "16001" to "16002", press "i" to enter "INSERT" mode.
+        <br /> Now use direction keys to bring cursor to the position of "1", type "2" and press "Delete" to delete "1" (Note:
+        backspace does not work).
+        <br /> Now press "Esc" to exit "INSERT" mode.
+        <br /> c. For saving the file, press "Esc" to enter command mode, press ":wq" (wq: write and quit).
+        <br />
+        <br /> 9. Removing old iMAS logs:
+        <br />
+        <code>
+		cd /dev-1/ashish/RoamwareDeploy/logs/iMAS<br />
+		/dev-1/ashish/RoamwareDeploy/logs/iMAS> ksh<br />
+		/dev-1/ashish/RoamwareDeploy/logs/iMAS> rm -rf imas.2*<br />
+		/dev-1/ashish/RoamwareDeploy/logs/iMAS> ls -lrth<br />
+		total 656<br />
+        -rw-r--r--   1 ashish   roamware    312K Nov 29 15:53 imas.log<br />
+    </code>
+    </div>
+
+    <div class="customSection">
+        <h1 class="customH1">Reading "AppAuthorization" data in the HTML, FTL and Rhino.</h1>
+
+        DATABASE:
+        <code>
+<br/>select * from appauthorization where appid = 'S30060';
+<br/>/*
+<br/>Insert into APPAUTHORIZATION (APPID,AUTHCODE,GRPID,AUTHVALUE,GRANTED) values ('S30060','showgrouptab','1040','yes','Y');
+<br/>Insert into APPAUTHORIZATION (APPID,AUTHCODE,GRPID,AUTHVALUE,GRANTED) values ('S30060','db.pool.name','1040','default','Y');
+<br/>Insert into APPAUTHORIZATION (APPID,AUTHCODE,GRPID,AUTHVALUE,GRANTED) values ('S30060','db.pool.name','dragroup','default','y');
+<br/>Insert into APPAUTHORIZATION (APPID,AUTHCODE,GRPID,AUTHVALUE,GRANTED) values ('S30060','permission','1040','edit','Y');
+<br/>Insert into APPAUTHORIZATION (APPID,AUTHCODE,GRPID,AUTHVALUE,GRANTED) values ('S30060','permission','dragroup','edit','y');
+<br/>Insert into APPAUTHORIZATION (APPID,AUTHCODE,GRPID,AUTHVALUE,GRANTED) values ('S30060','sdsservicelist','dragroup','dra','y');
+<br/>*/
+</code>
+        <br/>
+        <br/>RHINO:
+        <code>
+    <br/>__repository.authz.sdsservicelist
+</code>
+        <br/>
+        <br/>HTML:
+        <code>
+            <br/>&lt;input type = '&lt;#if __repository.authz.showgrouptab?? && __repository.authz.showgrouptab == "yes"&gt; text &lt;#else&gt; hidden &lt;/#if&gt;' /&gt;
+            </code>
+        <br/>
+        <br/>FTL:
+        <code>
+            <br/>&lt;load-data type="sql" name="svclist" main="false" &gt;
+            <br/>&ensp;&lt;exec-sql type="select" multivalued="true" &gt;
+            <br/>&ensp;&ensp;&lt;sql&gt;
+            <br/>&ensp;&ensp;&ensp;&lt;![CDATA[
+            <br/>&ensp;&ensp;&ensp;select ssm_service_name, ssm_service_description from sds_service_master
+            <br/>&ensp;&ensp;&ensp;&lt;#if __repository.authz.sdsservicelist ??&gt;
+            <br/>&ensp;&ensp;&ensp;&ensp;where ssm_service_name in (
+            <br/>&ensp;&ensp;&ensp;&ensp;&lt;#list __repository.authz.sdsservicelist?split(',') as val&gt;
+            <br/>&ensp;&ensp;&ensp;&ensp;'${val?upper_case}'&lt;#if val_has_next&gt;,&lt;/#if&gt;
+            <br/>&ensp;&ensp;&ensp;&ensp;&lt;/#list&gt;
+            <br/>&ensp;&ensp;&ensp;&ensp;)
+            <br/>&ensp;&ensp;&ensp;&lt;/#if&gt; order by svcdesc
+            <br/>&ensp;&ensp;&ensp;]]&gt;
+            <br/>&ensp;&ensp;&lt;/sql&gt;
+            <br/>&ensp;&lt;/exec-sql&gt;
+            <br/>&lt;/load-data&gt;
+            </code>
+    </div>
+    <!-- Class 'customSection' Closes. -->
+
+    <div class="customSection">
+        <h1 class="customH1">Printing the contents of Freemarker list generated from &lt;load-data&gt; tag of iMAS.</h1>
+        IMAS:
+        <br/>&lt;process name="showleftframe"&gt;
+        <br/>&lt;load-data type="sql" name="cosfeaturename" main="false"&gt;
+        <br/>&lt;exec-sql type="select" multivalued="false"&gt;
+        <br/>&lt;sql&gt;
+        <br/>&lt;![CDATA[
+        <br/>SELECT param_value AS cosfeaturename FROM sds_service_config
+        <br/>WHERE lower(svc_name) = 'amms'
+        <br/>AND param_name='amms.cos.feature.name'
+        <br/>AND 'cosengine' = (SELECT param_value FROM sds_service_config WHERE lower(svc_name) = 'amms' AND
+        <br/>param_name='sds.cos.plugin')
+        <br/>]]&gt;
+        <br/>&lt;/sql&gt;
+        <br/>&lt;/exec-sql&gt;
+        <br/>&lt;/load-data&gt;
+        <br/>
+        <br/>&lt;!-- Load command code list, which is static data. command codes are mapped to interface --&gt;
+        <br/>&lt;load-data type="dynhandler" name="commandcodelist"&gt;
+        <br/>&ensp;&lt;dynhandler type="data" class="com.roamware.sds2.ui.DiaCommandCodeLoader" /&gt;
+        <br/>&lt;/load-data&gt;
+        <br/>&lt;load-data type="dynhandler" name="coslist"&gt;
+        <br/>&ensp;&lt;dynhandler type="data" class="com.roamware.sds2.ui.CoSListLoader" /&gt;
+        <br/>&lt;/load-data&gt;
+        <br/>
+        <br/>RHINO:
+        <br/>&lt;script engine="rhino" name="logging" method="loggingfunction" embedded="true"&gt;
+        <br/>&lt;![CDATA[
+        <br/>importPackage(java.lang);
+        <br/>importPackage(java.util);
+        <br/>function loggingfunction(input) {
+        <br/>&ensp;var logger = input.get("__logger");
+        <br/>&ensp;logger.debug("Coslist: " + input.get("showleftframe_coslist"));
+        <br/>&ensp;return true;
+        <br/>}
+        <br/>]]&gt;
+        <br/>&lt;/script&gt;
+        <br/>
+        <br/>LOG:
+        <br/>Fri Nov 27|15:25:19.599|D|http-9999-2|Loaded [6] records for data loader [coslist]. Merging the elements of the last
+        record into the input hash.|com.imas.app.generic.parser.DataLoader|execute|170
+        <br/>Fri Nov 27|15:25:19.629|D|http-9999-2|Coslist: [{name=CoS_0, cosengine, id=0}, {name=CoS_1, cosengine, id=1}, {name=CoS_4,
+        cosengine, id=4}, {name=CoS_5, cosengine, id=5}, {name=CoS_2, cosengine, id=2}, {name=CoS_3, cosengine, id=3}]|sun.reflect.NativeMethodAccessorImpl|invoke0|0
+        <br/>------ ------ ------ ------ ------ ------ ------
+        <br/>
+        <br/>More Information:
+        <br/>
+        <br/>&lt;script engine="rhino" name="logging" method="loggingfunction" embedded="true"&gt;
+        <br/>&lt;![CDATA[
+        <br/>importPackage(java.lang);
+        <br/>importPackage(java.util);
+        <br/>function loggingfunction(input) {
+        <br/>var logger = input.get("__logger");
+        <br/>logger.debug("Coslist: " + input.get("showleftframe_coslist"));
+        <br/>
+        <br/> var nwsize = (input.get("showleftframe_coslist")).size(); //java.util.Vector, Vector&lt;Hashtable&gt;
+        <br/>
+        <br/>logger.debug("Coslist size: " + nwsize);
+        <br/>return true;
+        <br/>}
+        <br/>]]&gt;
+        <br/>&lt;/script&gt;
+        <br/>
+        <br/>iMAS Logs:
+        <br/>Fri Nov 27|15:50:01.415|D|http-9999-2|Coslist: [{name=CoS_0, cosengine, id=0}, {name=CoS_1, cosengine, id=1}, {name=CoS_4,
+        cosengine, id=4}, {name=CoS_5, cosengine, id=5}, {name=CoS_2, cosengine, id=2}, {name=CoS_3, cosengine, id=3}]|sun.reflect.NativeMethodAccessorImpl|invoke0|0
+        <br/>Fri Nov 27|15:50:01.495|D|http-9999-2|Coslist size: 6|sun.reflect.NativeMethodAccessorImpl|invoke0|0
+        <br/>
+        <br/>------ ------ ------ ------ ------ ------ ------
+        <h2 class="customH2">Another example using with a Freemarker scalars:
+            <br/>Also: "Showing the scope of &lt;load data&gt; list from the &lt;Global&gt; tag"
+            <br/>Also: "Calling iMAS process on click of a link on HTML template"</h2>
+        <br/>XML:
+        <br/>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+        <br/>&lt;!DOCTYPE application SYSTEM "../../../application.dtd"&gt;
+        <br/>&lt;application name="LNM" type="admin" version="1.0"&gt;
+        <br/>&lt;global&gt;
+        <br/> &lt;load-data type="sql" name="cosfeaturename" main="false"&gt;
+        <br/> &lt;exec-sql type="select" multivalued="false"&gt;
+        <br/> &lt;sql&gt;
+        <br/> &lt;![CDATA[
+        <br/> SELECT param_value AS cosfeaturename FROM sds_service_config
+        <br/> WHERE lower(svc_name) = 'amms'
+        <br/> AND param_name='amms.cos.feature.name'
+        <br/> AND 'cosengine' = (SELECT param_value FROM sds_service_config WHERE lower(svc_name) = 'amms' AND
+        <br/> param_name='sds.cos.plugin')
+        <br/> ]]&gt;
+        <br/> &lt;/sql&gt;
+        <br/> &lt;/exec-sql&gt;
+        <br/> &lt;/load-data&gt;
+        <br/>
+        <br/> &lt;!-- Load command code list, which is static data. command codes are mapped to interface --&gt;
+        <br/> &lt;load-data type="dynhandler" name="commandcodelist"&gt;
+        <br/> &lt;dynhandler type="data" class="com.roamware.sds2.ui.DiaCommandCodeLoader" /&gt;
+        <br/> &lt;/load-data&gt;
+        <br/>
+        <br/> &lt;load-data type="dynhandler" name="coslist"&gt;
+        <br/> &lt;dynhandler type="data" class="com.roamware.sds2.ui.CoSListLoader" /&gt;
+        <br/> &lt;/load-data&gt;
+        <br/>&lt;/global&gt;
+        <br/>&lt;app-start&gt;
+        <br/> &lt;invoke-process name="showmainframe" /&gt;
+        <br/>&lt;/app-start&gt;
+        <br/>
+        <br/>&lt;process name="showleftframe"&gt;
+        <br/> &lt;script engine="rhino" name="script133" method="createsql" embedded="true"&gt;
+        <br/> &lt;![CDATA[
+        <br/> importPackage(java.lang);
+        <br/> importPackage(java.util);
+        <br/> var logger;
+        <br/> function createsql(input) {
+        <br/> logger = input.get("__logger");
+        <br/> logger.debug("From Global section, cosfeaturename: " + input.get("cosfeaturename"));
+        <br/>...
+        <br/>&lt;/process&gt;
+        <br/>
+        <br/>&lt;screen name="addpage" copyinput="true"&gt;
+        <br/> &lt;set-field name="hpmnlist" refvalue="showaddframe.hpmnlist" /&gt;
+        <br/> &lt;set-field name="coslist" refvalue="showaddframe.coslist" /&gt;
+        <br/> &lt;set-field name="cosfeaturename" refvalue="global.cosfeaturename" /&gt;
+        <br/> &lt;set-field name="alliancelist" refvalue="global.alliancelist" /&gt;
+        <br/> &lt;set-field name="delmessage" refvalue="${delmessage}" /&gt;
+        <br/> &lt;set-field name="isadded" refvalue="${isadded}" /&gt;
+        <br/>&lt;/screen&gt;
+        <br/>
+        <br/>HTML:
+        <br/>&lt;a href="${imas}&amp;c= showleftframe&amp;"&gt;CALL IMAS PROCESS&lt;/a&gt;
+        <br/>
+        <br/>LOG:
+        <br/>Sat Nov 28|12:04:23.945|D|http-9999-5|From Global section, cosfeaturename: AMMS|sun.reflect.GeneratedMethodAccessor39|invoke|0
+    </div>
+    <div class="customSection">
+        <h1 class="customH1">Using 'screen' program on a *nix machine.</h1>
+        <br/>1: For 'screen' program, you need two files '.screenrc' and 'screen'. You can use WinSCP or 'scp' to copy these files
+        on your machine.
+        <br/>&ensp;1.1: Go to the 'home' directory
+        <br/>&ensp;bash-3.2$ cd
+        <br/>&ensp;
+        <br/>&ensp;bash-3.2$ scp amy@192.168.130.55:~/SPRS/setup.sh ./
+        <br/>&ensp;Password:
+        <br/>&ensp;scp: ~/SPRS/setup.sh: No such file or directory
+        <br/>&ensp;
+        <br/>&ensp;bash-3.2$ scp amy@192.168.130.55:.screenrc ./
+        <br/>&ensp;Password:
+        <br/>&ensp;.screenrc 100% |***************************************| 19354 00:00
+        <br/>&ensp;
+        <br/>&ensp;/dev2/home/ashish> scp amy@192.168.130.55:screen ./
+        <br/>&ensp;Password:
+        <br/>&ensp;screen 100% |***************************************| 319 KB 00:00
+        <br/>&ensp;
+        <br/>&ensp;/dev2/home/ashish> scp amy@192.168.130.55:/dev3/amy/screen ./
+        <br/>&ensp;Password:
+        <br/>&ensp;screen 100% |***************************************| 319 KB 00:00
+        <br/>
+        <br/>2: To create a new screen
+        <br/>&ensp;screen -S GetICamp
+        <br/>
+        <br/>3: To view the existing screen:
+        <br/>&ensp;./screen -ls
+        <br/>&ensp;&ensp;There is a screen on:
+        <br/>&ensp;&ensp; 2690.GetOM (Detached)
+        <br/>&ensp;&ensp;1 Socket in /tmp/uscreens/S-ashish.
+        <br/>
+        <br/>4: To enter an existing screen:
+        <br/>&ensp;./screen -x GetOM
+        <br/>
+        <br/>5: Detach from a screen from inside the 'screen', key-combination sequence:
+        <br/>&ensp;1: Ctrl + A
+        <br/>&ensp;2: D
+        <br/>
+        <br/>6: To create a new tab in a 'screen', key-combination sequence:
+        <br/>&ensp;1: Ctrl + A
+        <br/>&ensp;2: C
+        <br/>
+        <br/>7: To delete a tab from inside the 'screen':
+        <br/>&ensp;Ctrl + D
+        <br/>
+        <br/>8: To delete a screen:
+        <br/>&ensp;Press 'Ctrl+D' the number of times equal to the number of tabs in that screen.
+        <br/>&ensp;Output:
+        <br/>&ensp;[screen is terminating]
+        <br/>
+        <br/>9: To rename a tab in a 'screen', key-combination sequence:
+        <br/>&ensp;1: Ctrl+A
+        <br/>&ensp;2: Shift+A
+        <br/>
+        <br/>10: While on the 'screen', to switch between tabs, press:
+        <br/>&ensp;F7
+    </div>
+    <div class="customSection">
+        <h1 class="customH1">Using the &lt;script&gt; in the &lt;global&gt; tag:</h1>
+        This is an application of the iMAS tag &lt;use-record&gt;
+        <br/>
+        <br/>&lt;use-record&gt;: This tag appears within &lt;exec-sql&gt; tag. Through this tag the result set of SQL execution
+        is made available for manipulation. The manipulation can be done through the &lt;script&gt; tag (as explained below).
+        <br/>
+        <br/>&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+        <br/>&lt;!DOCTYPE application SYSTEM "../../../application.dtd"&gt;
+        <br/>&lt;application name="Policy Configuration" type="admin" version="1.0"&gt;
+        <br/>&emsp;&lt;global&gt;
+        <br/>&emsp;&lt;load-data type="sql" name="labels" main="false" &gt;
+        <br/>&emsp;&lt;exec-sql type="select" multivalued="false" &gt;
+        <br/>&emsp;&emsp;&lt;sql&gt;
+        <br/>&emsp;&emsp;&emsp;&lt;![CDATA[ select 'lables' from dual ]]&gt;
+        <br/>&emsp;&emsp;&lt;/sql&gt;
+        <br/>&emsp;&emsp;&lt;use-record&gt;
+        <br/>&emsp;&emsp;&lt;script engine="rhino" name="loadAppLabels" method="myMethod" embedded="true"&gt;
+        <br/>&emsp;&emsp;&emsp;&lt;![CDATA[
+        <br/>&emsp;&emsp;&emsp;&emsp;importPackage(java.lang);
+        <br/>&emsp;&emsp;&emsp;&emsp;importPackage(java.util);
+        <br/>&emsp;&emsp;&emsp;&emsp;importPackage(java.io);
+        <br/>&emsp;&emsp;&emsp;&emsp;function myMethod (input)
+        <br/>&emsp;&emsp;&emsp;&emsp;{
+        <br/>&emsp;&emsp;&emsp;&emsp;&emsp;var logger = input.get("__logger");
+        <br/>&emsp;&emsp;&emsp;&emsp;&emsp;var screen = input.get("__screen");
+        <br/>&emsp;&emsp;&emsp;&emsp;&emsp;...
+        <br/>&emsp;&emsp;&emsp;&emsp;&emsp;return true;
+        <br/>&emsp;&emsp;&emsp;&emsp;}
+        <br/>&emsp;&emsp;&emsp;]]&gt;
+        <br/>&emsp;&emsp;&lt;/script&gt;
+        <br/>&emsp;&emsp;&lt;/use-record&gt;
+        <br/>&emsp;&lt;/exec-sql&gt;
+        <br/>&emsp;&lt;/load-data&gt;
+        <br/>&emsp;...
+        <br/>&emsp;&lt;/global&gt;
+        <br/>&emsp;&lt;app-start&gt;
+        <br/>&emsp;&emsp;&lt;invoke-process name="showfirstpage" /&gt;
+        <br/>&emsp;&lt;/app-start&gt;
+    </div>
+    <div class="customSection">
+        <h1 class="customH1">Quirk 1: What happens when your application is using Freemarker2 but column 'renderer' in table 'applications' says
+            'freemarker' and not 'freemarker2'</h1>
+        <br/> When your application is using Freemarker2 but column 'renderer' in table 'applications' says 'freemarker' and not
+        'freemarker2', during this mismatch you will observe following difference in the iMAS logs:
+        <br/>
+        <br/> Logs with renderer mismatch:
+        <code>
+            <br/>Mon Mar 12|21:27:02.002|D|http-nio-8443-exec-7|Loading freemarker template: /opt/Roamware/roamwaresds/runtime/webapps/S363/templates/en/querypage.html|com.uws.infra.renderer.FreeMarkerRendererFactory|getTemplate|179
+            <br/>Mon Mar 12|21:27:02.050|D|http-nio-8443-exec-7|<mark>Using renderer instance: FM Renderer [freemarker.template.Template@d041557]</mark>|com.uws.infra.SessionContextFrameWork|doRender|1944
+            <br/>Mon Mar 12|21:27:02.052|D|http-nio-8443-exec-7|Getting converter: com.uws.infra.util.HTMLEntityHandler|com.uws.infra.renderer.FreeMarkerRenderer|render|58
+            <br/>Mon Mar 12|21:27:02.060|D|http-nio-8443-exec-7|<mark>Total number of bytes written: 111</mark>|com.uws.infra.SessionContextFrameWork|render|1110
+            <br/>Mon Mar 12|21:27:02.061|D|http-nio-8443-exec-7|<<<< ---- Request handling completed|com.uws.infra.SessionContextFrameWork|requestIn|818
+        </code>
+        <br/>
+        <br/> Logs with renderer column is set to 'freemarker2' for Freemarker2 application:
+        <code>
+            <br/>Mon Mar 12|16:20:57.278|D|http-nio-8081-exec-1|Loading freemarker template [S363/templates/en/querypage.html] from [D:\Work Space\Roamware_231117_SCSCA\roamwaresds\runtime/webapps] for application [S363]|com.uws.infra.renderer.FreeMarkerRendererFactory2|getTemplate|209
+            <br/>Mon Mar 12|16:20:57.294|D|http-nio-8081-exec-1|<mark>Using renderer instance: FM Renderer2 [2145106720]</mark>|com.uws.infra.SessionContextFrameWork|doRender|1830
+            <br/>Mon Mar 12|16:20:57.295|D|http-nio-8081-exec-1|Sending MIME type: text/html|com.uws.infra.http.FMRenderer2|setExtraParams|158
+            <br/>Mon Mar 12|16:20:57.297|D|http-nio-8081-exec-1|<mark>Total number of bytes written: 15711</mark>|com.uws.infra.SessionContextFrameWork|render|1079
+            <br/>Mon Mar 12|16:20:57.298|D|http-nio-8081-exec-1|<<<< ---- Request handling completed|com.uws.infra.SessionContextFrameWork|requestIn|787
+        </code>
+        <br/>
+        <br/>Total number of bytes that were written during the mismatch is '111' (though the file 'querypage.html' size is 14KB).
+        Also, iMAS logs that is used the renderer instance 'freemarker.template.Template' (not 'FM Renderer2').
+        <br/>
+        <br/>On the browser, you get a blank page, this could be confusing at first as there is no error reported for this mismatch
+        except for blank page on the browser.
+        <br/>
+        <a target="_blank" href="http://2.bp.blogspot.com/-ePk4iQJNOhw/Wq6NlEqtJLI/AAAAAAAAC2g/sa-w02MuQoMAQhdw2PFwnFYyerUrXIHFgCK4BGAYYCw/s1600/iMAS%2B-%2BBlank%2Bscreen%2Bif%2BFM2%2Bapp%2Bhas%2B%2527renderer%2527%2Bcol%2Bin%2Bapplications%2Btable%2Bset%2Bto%2B%2527freemarker%2527.png"
+            imageanchor="1">
+            <img border="0" height="328" src="https://2.bp.blogspot.com/-ePk4iQJNOhw/Wq6NlEqtJLI/AAAAAAAAC2g/sa-w02MuQoMAQhdw2PFwnFYyerUrXIHFgCK4BGAYYCw/s640/iMAS%2B-%2BBlank%2Bscreen%2Bif%2BFM2%2Bapp%2Bhas%2B%2527renderer%2527%2Bcol%2Bin%2Bapplications%2Btable%2Bset%2Bto%2B%2527freemarker%2527.png"
+                width="640" />
+        </a>
+    </div>
+    <div class="customSection">
+        <h1 class="customH1">Compiling a product (like OM or SCA) using build command 'ant make'</h1>
+        # In "Roamware_Source" directory, we keep the files such as 'getom_tmobile.sh', 'getom.sh'. This is the directory parallel
+        to which directories like "Roamware" (result of checkout process) and "RoamwareBuild" (result of "ant make" build
+        process) will be created.
+        <br/>/dev2/home/ashish/Roamware_Source> source getom_tmobile.sh
+        <br/>
+        <br/>This has commands to make directories, check this one:
+        <br/>
+        <code>mkdir -p $HOME/Roamware</code>
+        <br/>................................................................
+        <br/>
+        <br/>In the file "D:\CVSRoot\products\SCA\6.1\getsca.sh" you notice some commands like these:
+        <code>
+            <br/>&emsp;&emsp;cvs -d :pserver:build:build@172.16.XXX.XXX:/cvs/platform checkout -r $RFC_TAG rfc/6.0/cpp
+            <br/>&emsp;&emsp;cvs -d :pserver:build:build@172.16.XXX.XXX:/cvs/platform checkout -r $RFC_TAG rfc/6.0/mib
+            <br/>&emsp;&emsp;cvs -d :pserver:build:build@172.16.XXX.XXX:/cvs/platform checkout -r $RFC_TAG rfc/6.0/scripts
+            <br/>&emsp;&emsp;cvs -d :pserver:build:build@172.16.XXX.XXX:/cvs/platform checkout -r $RFC_TAG rfc/6.0/docs/RFC-ReleaseNotes.txt
+        </code>
+        <br/>
+        <br/>Here you have to change these to put your username and password like this:
+        <br/>
+        <code>&emsp;&emsp;cvs -d :pserver:username:password@172.16.XXX.XXX:/cvs/platform checkout -r $iMAS_TAG iMAS6.0</code>
+        <br/>................................................................
+        <br/>Our "getsca.sh" file is presently in DOS format:
+        <code>
+        <br/>/dev2/home/ashish/RoamwareSource> vi getsca.sh
+        <br/>#!/usr/bin/bash^M
+        <br/>^M
+        <br/>export RFC_TAG=R171001^M
+        <br/>export STACK_TAG=R170803^M
+        <br/>export NADA_TAG=R130501^M
+        <br/>export MAPSRVR_TAG=R170101^M
+        <br/>...
+	    </code>
+        <br/>
+        <br/>To change the DOS format file to UNIX format (with LF (0x0A, 10 in decimal) as the only line feed character), use:
+        <br/>dos2unix
+        <br/>&emsp;&emsp;Unix-like operating system command
+        <br/>&emsp;&emsp;Function: Convert FILE in-place from DOS to Unix format. When no file is given, use stdin/stdout
+        <br/>&emsp;&emsp;Syntax: dos2unix [options] [-c convmode] [-o file ...] [-n infile outfile ...]
+        <br/>&emsp;&emsp;Example: dos2unix -iso -n in.txt out.txt
+        <br/>
+        <br/>
+        <code>>>> dos2unix getsca.sh getsca.sh</code>
+        <br/>................................................................
+        <br/># "getsca.sh" script will checkout all the SCA files.
+
+        <br/>
+        <code>/dev2/home/ashish/RoamwareSource> source getsca.sh</code>
+
+        <br/># After the 'checkout' is successful, there will be a directory structure rooted at "/dev2/home/ashish/Roamware":
+        <br/>
+        <code>>>> cd /dev2/home/ashish/Roamware/application/SCA/6.1/build</code>
+        <br/>
+        <br/># At "/dev2/home/ashish/Roamware/application/SCA/6.1/build" will be the "build.xml" file from which we would "ANT
+        MAKE" SCA:
+        <br/>
+        <code>>>> ant make</code>
+        <br/>
+        <br/># After "ANT MAKE", you can find the Zip file that has GUI applications as shown below:
+        <code>
+	        <br/>>>> cd /dev2/home/ashish/RoamwareBuild/build
+            <br/>>>> find . -name *.zip
+        </code>
+        <br/>
+        <br/>For this case the file is like this:
+        <code>
+            <br/>>>> ls -lh /dev2/home/ashish/RoamwareBuild/build/scaapps/temp/sca/ScaApps.zip
+            <br/>-rw-r--r--   1 ashish   other       359K Mar 19 15:58 /dev2/.../sca/ScaApps.zip
+        </code>
+        <br/>
+        <br/># Note that before SCA, you have to build iMAS (this follows the same steps except different dependencies).
+        <br/># You can see the SCA dependencies from the file "getsca.sh", here is snippet of the code you have to look for:
+        <code>
+            <br/>&emsp;&emsp;export RFC_TAG=R171001
+            <br/>&emsp;&emsp;export STACK_TAG=R170803
+            <br/>&emsp;&emsp;export NADA_TAG=R130501
+            <br/>&emsp;&emsp;export MAPSRVR_TAG=R170101
+            <br/>&emsp;&emsp;export EXT_TAG=R170801
+            <br/>&emsp;&emsp;export SCA_TAG=Q180205
+            <br/>&emsp;&emsp;export IRDB_TAG=R100201
+            <br/>&emsp;&emsp;export OM_TAG=R130903
+            <br/>&emsp;&emsp;export ENVIRON_TAG=R171201
+        </code>
+    </div>
+    <div class="customSection">
+        <h1 class="customH1">Accessing the result of single-row SQL query fired in &lt;global&gt; section</h1>
+        XML Code:
+        <code>
+            <br/>&emsp;&lt;global&gt;
+            <br/>&emsp;&emsp;&lt;load-data type="sql" name="kpi_count" main="false"&gt;
+            <br/>&emsp;&emsp;&lt;exec-sql type="select" multivalued="false"&gt;
+            <br/>&emsp;&emsp;&emsp;&lt;sql&gt;
+            <br/>&emsp;&emsp;&emsp;&emsp;&lt;![CDATA[ select count(kpi_id) as kpi_count from ri_grq_kpi_service_mapping ]]&gt;
+            <br/>&emsp;&emsp;&emsp;&lt;/sql&gt;
+            <br/>&emsp;&emsp;&lt;/exec-sql&gt;
+            <br/>&emsp;&emsp;&lt;/load-data&gt;
+            <br/>&emsp;&lt;/global&gt;
+            <br/>...
+            <br/>&emsp;&lt;process name="saveconfiguration"&gt;
+            <br/>&emsp;&emsp;&lt;script engine="rhino" name="logging" method="logging" embedded="true"&gt;
+            <br/>&emsp;&emsp;&emsp;&lt;![CDATA[
+            <br/>&emsp;&emsp;&emsp;&emsp;importPackage(java.lang) ;
+            <br/>&emsp;&emsp;&emsp;&emsp;function logging(input) {
+            <br/>&emsp;&emsp;&emsp;&emsp;&emsp;var logger = input.get("__logger");	
+            <br/>&emsp;&emsp;&emsp;&emsp;&emsp;logger.debug("Debug: kpi_count: " + input.get("global_kpi_count").get("kpi_count")); //40
+            <br/>&emsp;&emsp;&emsp;&emsp;}
+            <br/>&emsp;&emsp;&emsp;]]&gt;
+            <br/>&emsp;&emsp;&lt;/script&gt;
+            <br/>&emsp;&lt;/process&gt;
+        </code>
+    </div>
+
+
+</div>

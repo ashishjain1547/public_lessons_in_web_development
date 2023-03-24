@@ -1,0 +1,216 @@
+<head>
+    <script crossorigin="anonymous" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: window.location.protocol + "//" + window.location.hostname + "/p/personal-posts-menu.html",
+                success: function (result) {
+                    $("div.customTemporaryCodeHolder").html(result);
+                    $("nav.customDynamicNav").html(
+                        $("div.customTemporaryCodeHolder nav.customBitsWilpMenu").html()
+                    );
+                }
+            });
+        }); 
+    </script>
+    <!-- Google AdSense Using Machine Learning Code -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3071098372371409",
+            enable_page_level_ads: true
+        });
+    </script>
+    <style>
+        pre {
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<nav class="customDynamicNav"> </nav>
+<div class="customTemporaryCodeHolder"> </div>
+<br />
+<!-- End of 'Personal Posts Menu Template For Copy-Paste'. It started from the top of the page from <HEAD> tag. -->
+<pre>1. Preparing the database.
+
+The database we are using is 'Oracle Database 10g Express Edition (XE)'.
+Download link for 'Oracle Database 10g XE for Windows 32-bit': 
+https://drive.google.com/open?id=1brmFcZFqg8fKQnUHKbPMRsnOsXgelcsZ
+
+Download link for 'Oracle Database 11g XE for Windows 64-bit': 
+https://drive.google.com/open?id=1LKXt3vQUeaZCjPjDojgzl3syeqRa5kvo
+
+<i style="color: darkgreen">E:\>
+
+E:\>cd E:\Workspace\GitHub\omocron\Omocron DB Dump (20180816)
+
+E:\Workspace\GitHub\omocron\Omocron DB Dump (20180816)>sqlplus</i>
+
+<i style="color: darkblue;">SQL*Plus: Release 10.2.0.1.0 - Production on Sat Jan 18 16:47:39 2020
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+
+Connected to:
+Oracle Database 10g Express Edition Release 10.2.0.1.0 - Production</i>
+
+<i style="color: darkgreen;">SQL> @Omocron_install.sql</i>
+
+The logs for this execution are saved in the file "Omocron_install.spool".
+
+2. Check database installation.
+
+Oracle Database 10g Apex application will be running on the link: http://127.0.0.1:8080/apex
+
+Here you can login with your 'system' user and check the installation.
+
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-zTlzKM7g4oQ/XiMon10IWuI/AAAAAAAAESM/OTa15V-DC-g4_c0fzW44mUYPAiPtUX95wCLcBGAsYHQ/s1600/8080.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="316" data-original-width="500" src="https://1.bp.blogspot.com/-zTlzKM7g4oQ/XiMon10IWuI/AAAAAAAAESM/OTa15V-DC-g4_c0fzW44mUYPAiPtUX95wCLcBGAsYHQ/s1600/8080.png" /></a></div>
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://1.bp.blogspot.com/-fh1YoE0uIa0/XiLysun9Y_I/AAAAAAAAER8/d0HCVRDMdwYtWEloBmkYqmfn9Hy2ORPDgCLcBGAsYHQ/s1600/Apex.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" data-original-height="402" data-original-width="573" src="https://1.bp.blogspot.com/-fh1YoE0uIa0/XiLysun9Y_I/AAAAAAAAER8/d0HCVRDMdwYtWEloBmkYqmfn9Hy2ORPDgCLcBGAsYHQ/s1600/Apex.png" /></a></div>
+<br />    
+    
+3. Server setup.
+
+The server we are using is Apache Tomcat 9.0.30 (Windows x64).
+
+Download links:
+https://tomcat.apache.org/download-90.cgi
+http://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.30/bin/apache-tomcat-9.0.30-windows-x64.zip
+
+We have extracted the archive at the path 'E:\Workspace'. 
+
+We have to change the HTTP port for Tomcat as the default 8080 port is used by Oracle Database 10g Apex application.
+
+For the port in use, Tomcat will throw this error: "Caused by: java.net.BindException: Address already in use: bind"
+
+Open the file:
+E:\Workspace\apache-tomcat-9.0.30\conf\server.xml
+
+Change these ports:
+A. &lt;Server port="8095" shutdown="SHUTDOWN">...&lt;Server&gt;
+
+B. &lt;Connector port="8090" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" /&gt;
+
+C. &lt;Connector port="8099" protocol="AJP/1.3" redirectPort="8443" /&gt;
+
+Next, we start the server:
+<i style="color: darkgreen;">E:\Workspace\apache-tomcat-9.0.30\bin>startup.bat</i>
+OR
+<i style="color: darkgreen;">E:\Workspace\apache-tomcat-9.0.30\bin>catalina.bat run</i>
+
+Logs:
+<i style="color: darkblue;">Using CATALINA_BASE:   "E:\Workspace\apache-tomcat-9.0.30"
+Using CATALINA_HOME:   "E:\Workspace\apache-tomcat-9.0.30"
+Using CATALINA_TMPDIR: "E:\Workspace\apache-tomcat-9.0.30\temp"
+Using JRE_HOME:        "E:\programfiles\Java_11"
+Using CLASSPATH:       "E:\Workspace\apache-tomcat-9.0.30\bin\bootstrap.jar;E:\Workspace\apache-tomcat-9.0.30\bin\tomcat-juli.jar"</i>
+
+Checking Tomcat:
+<div class="separator" style="clear: both; text-align: center;">
+    <a href="https://1.bp.blogspot.com/-u5mMYC34dhU/XiLysAPxnZI/AAAAAAAAER0/DCIEp4wujFo_KTavNYsCQ8iDQ5kWMvf8ACLcBGAsYHQ/s1600/Tomcat.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="466" data-original-width="676" src="https://1.bp.blogspot.com/-u5mMYC34dhU/XiLysAPxnZI/AAAAAAAAER0/DCIEp4wujFo_KTavNYsCQ8iDQ5kWMvf8ACLcBGAsYHQ/s1600/Tomcat.png" /></a></div>
+
+E:\Workspace\apache-tomcat-9.0.30\webapps\ROOT\WEB-INF\web.xml
+
+&lt;!-- Database connection parameters ___ Open --&gt;
+&lt;!-- &lt;init-param&gt; will be used if you want to initialize some parameter for a particular servlet. When request come to servlet first its init method will be called then doGet/doPost whereas if you want to initialize some variable for whole application you will need to use &lt;context-param&gt;. Every servlet will have access to the context variable.
+
+URL: https://stackoverflow.com/questions/28392888/init-param-and-context-param --&gt;
+
+&lt;context-param&gt;
+    &lt;param-name&gt;driverName&lt;/param-name&gt;
+    &lt;param-value&gt;oracle.jdbc.driver.OracleDriver&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+&lt;context-param&gt;
+    &lt;param-name&gt;dbURL&lt;/param-name&gt;
+    &lt;param-value&gt;jdbc:oracle:thin:@localhost:1521:xe&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+&lt;context-param&gt;
+    &lt;param-name&gt;dbUsername&lt;/param-name&gt;
+    &lt;param-value&gt;system&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+&lt;context-param&gt;
+    &lt;param-name&gt;dbPassword&lt;/param-name&gt;
+    &lt;param-value&gt;system&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+&lt;!-- Database connection parameters ___ Close --&gt;
+
+&lt;context-param&gt;
+    &lt;param-name&gt;logsDirectoryPath&lt;/param-name&gt;
+    &lt;param-value&gt;E:/omocron_logs&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+There are issues with using Tomcat 9.0.30 and latest codebase.
+
+We would use Tomcat 8.0.27 and code base from April, 2018.
+
+Issue: Tomcat 8.0.27 is not working with Java 11.
+
+Logs:
+
+<i style="color: darkgreen;">E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\bin>catalina.bat run</i>
+
+<i style="color: darkred;">Using CATALINA_BASE:   "E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)"
+Using CATALINA_HOME:   "E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)"
+Using CATALINA_TMPDIR: "E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\temp"
+Using JRE_HOME:        "E:\programfiles\Java_11"
+Using CLASSPATH:       "E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\bin\bootstrap.jar;E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\bin\tomcat-juli.jar"
+-Djava.endorsed.dirs=E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\endorsed is not supported. Endorsed standards and standalone APIs in modular form will be supported via the concept of upgradeable modules.
+Error: Could not create the Java Virtual Machine.
+Error: A fatal exception has occurred. Program will exit.</i>
+
+We would install Java 8 using file "jdk-8u201-windows-x64.exe".
+
+Download link: https://drive.google.com/open?id=1DzQtdd9e4gk82zhZAWFH9KkfpTy8R6g5
+
+We create a ".bat" file to setup our environment for Tomcat 8.0.27 to run with Java 8.
+
+Location: E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\bin\set_env_variables.bat
+
+<i style="color: darkgreen;">set JAVA_HOME=C:\Program Files\Java\jdk1.8.0_121
+set JRE_HOME=C:\Program Files\Java\jre1.8.0_201
+set PATH=%JAVA_HOME%\bin;%PATH%</i>
+
+In 20180401 codebase, we would change the file to set our database connection parameters:
+<i style="color: darkgreen;">public DbConn() {
+    try {
+       Class.forName("oracle.jdbc.driver.OracleDriver");
+       this.conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "system", "system");
+    } catch (ClassNotFoundException var2) {
+       Logger.getLogger(DbConn.class.getName()).log(Level.SEVERE, (String)null, var2);
+    } catch (SQLException var3) {
+       Logger.getLogger(DbConn.class.getName()).log(Level.SEVERE, (String)null, var3);
+    }
+} </i>
+
+Then we would compile it again in the same environment as Tomcat 8.0.27:
+
+<i style="color: darkgreen;">E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\webapps\ROOT\WEB-INF\classes\dbPack>"E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\bin\set_env_variables.bat"
+
+E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\webapps\ROOT\WEB-INF\classes\dbPack>java -version</i>
+<i style="color: darkblue;">java version "1.8.0_201"
+Java(TM) SE Runtime Environment (build 1.8.0_201-b09)
+Java HotSpot(TM) 64-Bit Server VM (build 25.201-b09, mixed mode)</i>
+
+<i style="color: darkgreen;">E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\webapps\ROOT\WEB-INF\classes\dbPack>javac DbConn.java --release 8</i>
+
+We start the server again.
+
+<i style="color: darkgreen;">E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\bin>catalina.bat run</i>
+
+<span style="color: darkred;">Issue: The 20180401 codebase is hardcoded to use port 8084 for Tomcat. </span>
+We need to fix it in file "E:\Workspace\GitHub\omocron\Omocron Tomcat 8.0.27 (20180401)\conf\server.xml" in line <i style="color: darkgreen;">Connector port="8084" protocol="HTTP/1.1"</i>. 
+
+</pre>

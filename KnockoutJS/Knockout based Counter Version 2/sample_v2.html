@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sample-Counter</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://knockoutjs.com/downloads/knockout-3.5.1.js"></script>
+    <style>
+        .text-highlighter{
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1 data-bind="text:count"  class="text-highlighter" ></h1>
+    </div>
+    <script>
+        function ItemViewModel() {
+            var self = this;
+            this.count= ko.observable(0);
+
+            this.incrementer = function(){
+                self.count(self.count() + self.increment());
+            }
+
+            this.increment = ko.observable(1) 
+
+            
+            setInterval(this.incrementer, (self.increment() * 1000))
+
+        }
+        var viewModel = new ItemViewModel();
+        ko.applyBindings(viewModel);
+    </script>
+</body>

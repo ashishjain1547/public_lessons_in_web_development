@@ -1,0 +1,209 @@
+<head>
+  <script crossorigin="anonymous" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          $.ajax({
+              url: window.location.protocol + "//" + window.location.hostname + "/p/personal-posts-menu.html",
+              success: function (result) {
+                  $("div.customTemporaryCodeHolder").html(result);
+                  $("nav.customDynamicNav").html(
+                      $("div.customTemporaryCodeHolder nav.customBitsWilpMenu").html()
+                  );
+              }
+          });
+
+          $.ajax({
+              url: window.location.protocol + "//" + window.location.hostname + "/p/follow-us-on-social-media.html",
+
+              success: function (result) {
+                  $("span.customTempCodeHolderForSocialMedia").html(result);
+                  $("div.customSocialMediaBtnsWrapper").html(
+                      $("span.customTempCodeHolderForSocialMedia div.customSocialMediaWrapper").html()
+                  );
+              }
+
+          });
+      }); 
+  </script>
+  <!-- Google AdSense Using Machine Learning Code -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-3071098372371409",
+          enable_page_level_ads: true
+      });
+  </script>
+
+  <style>
+      .customTempCodeHolderForSocialMedia {
+          display: none;
+      }
+
+      pre {
+          white-space: pre-wrap;
+          white-space: -moz-pre-wrap;
+          white-space: -pre-wrap;
+          white-space: -o-pre-wrap;
+          word-wrap: break-word;
+      }
+  </style>
+</head>
+<div class="customTemporaryCodeHolder"> </div>
+<span class="customTempCodeHolderForSocialMedia"> </span>
+
+<nav class="customDynamicNav"> </nav> <br />
+<div class="customSocialMediaBtnsWrapper"> </div>
+<!-- End of 'Personal Posts Menu Template For Copy-Paste'. It started from the top of the page from <HEAD> tag. -->
+
+<pre><div class="separator" style="clear: both;"><a href="https://1.bp.blogspot.com/-71NcDS2OXSA/X2h5D0tDumI/AAAAAAAAFjE/n4fzZ5GXS-8D-2Wl-4SOs63lMICSNjl7wCLcBGAsYHQ/s0/ES6.jpeg" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" data-original-height="300" data-original-width="500" src="https://1.bp.blogspot.com/-71NcDS2OXSA/X2h5D0tDumI/AAAAAAAAFjE/n4fzZ5GXS-8D-2Wl-4SOs63lMICSNjl7wCLcBGAsYHQ/s0/ES6.jpeg"/></a></div>
+1. 
+  <i style="color: blue">clear()</i>
+  This function clears the 'output pane' in 'JS console'.
+
+2. 
+  You can define an array as follows:
+
+  <i style="color: blue">var arr = [
+    'elem a',
+    'elem b',
+    'elem c'
+  ] </i>
+
+  'Shift + Enter' lets you add a line-feed in the code in Firefox JS Console.
+
+3. 
+  <i style="color: blue">"arr.length" </i>
+  Will return you '3'.
+
+4.
+  Get unique elements from an Array:
+  With ES6:
+  <i style="color: blue">var a = ['a', 'b', 'c', 'c']
+  console.log([...new Set(a)]) </i>
+  
+  Out:
+   ["a", "b", "c"]
+   
+  OR
+   <i style="color: blue">Array.from(new Set(a)); </i>
+  
+  OR
+   <i style="color: blue">list = list.filter((x, i, a) => a.indexOf(x) === i) </i>
+   
+5.
+  To concatenate two arrays:
+  <i style="color: blue">a = ['a', 'b', 'c', 'c']
+  b = ['d', 'e']
+  console.log(a.concat(b)) </i>
+  
+  Out:
+   ["a", "b", "c", "c", "d", "e"]
+  
+6. 
+  ES6 based counter:
+    <i style="color: blue">var cntr = 0;
+    function myFunction() {
+      console.log(arr[cntr]);
+      cntr++;
+    } </i>
+
+7.
+  Add an element to "DOM body" before other child elements.
+    <i style="color: blue">b = document.querySelector("body")
+    theKid = document.createElement("p");
+    theKid.innerHTML = '&lt;button onclick="myFunction(chatroom_names_kenya)" style="position: sticky !important;top: 0;z-index: 999;"&gt;Submit&lt;/button&gt;';
+    b.insertBefore(theKid, b.firstChild) </i>
+
+8.
+  Ways to access an element of HTML DOM using JavaScript:
+  
+ <b>Gets           Selector Syntax Method </b>
+ ID                #demo           getElementById()
+ Class             .demo           getElementsByClassName()
+ Tag               demo            getElementsByTagName()
+ Selector (single)                 querySelector()
+ Selector (all)                    querySelectorAll()
+
+ About Query Selectors: It is JavaScript's method of accessing the DOM with CSS selectors.
+
+9.
+  Finding HTML Elements by HTML Object Collections:
+    <i style="color: blue">var x = document.forms["frm1"];
+    var text = "";
+    var i;
+    for (i = 0; i < x.length; i++) {
+      text += x.elements[i].value + "&lt;br&gt;";
+    }
+    document.getElementById("demo").innerHTML = text;  </i>
+
+  The following HTML objects (and object collections) are also accessible:
+  1. document.anchors
+  2. document.body
+  3. document.documentElement
+  4. document.embeds
+  5. document.forms
+  6. document.head
+  7. document.images
+  8. document.links
+  9. document.scripts
+  10. document.title
+
+10.
+  Identifying type of a variable:
+  The typeof operator returns the type of a variable, object, function or expression:
+  
+    <i style="color: blue">typeof "John"                 // Returns string
+    typeof 3.14                   // Returns number
+    typeof NaN                    // Returns number
+    typeof false                  // Returns boolean
+    typeof [1, 2, 3, 4]           // Returns object
+    typeof {name:'John', age:34}  // Returns object
+    typeof new Date()             // Returns object
+    typeof function () {}         // Returns function
+    typeof myCar                  // Returns undefined (if myCar is not declared)
+    typeof null                   // Returns object  </i>
+
+  Please observe:
+    The data type of NaN is number
+    The data type of an array is object
+    The data type of a date is object
+    The data type of null is object
+    The data type of an undefined variable is undefined
+
+11.
+  The instanceof Operator
+  The instanceof operator returns true if the specified object is an instance of the specified object:
+
+    <i style="color: blue">var cars = ["Saab", "Volvo", "BMW"];
+    
+    cars instanceof Array;          // Returns true
+    cars instanceof Object;         // Returns true
+    cars instanceof String;         // Returns false
+    cars instanceof Number;         // Returns false </i>
+
+12.
+  Spread Operator
+  
+  Spread operator allows an iterable to expand in places where 0+ arguments are expected. It is mostly used in the variable array where there is more than 1 values are expected. It allows us the privilege to obtain a list of parameters from an array. Syntax of Spread operator is same as "Rest parameter" but it works completely opposite of it. 
+
+  12.1    
+    // spread operator doing the concat job 
+    <i style="color: blue">let arr = [1,2,3]; 
+    let arr2 = [4,5]; 
+      
+    arr = [...arr,...arr2]; 
+    console.log(arr); // [ 1, 2, 3, 4, 5 ]  </i>
+
+  12.2 
+    // spread operator for copying  
+    <i style="color: blue">let arr = ['a','b','c']; 
+    let arr2 = [...arr]; 
+      
+    console.log(arr); // [ 'a', 'b', 'c' ] 
+      
+    arr2.push('d'); //inserting an element at the end of arr2 
+      
+    console.log(arr2); // [ 'a', 'b', 'c', 'd' ] 
+    console.log(arr); // [ 'a', 'b', 'c' ]  </i>
+</pre>

@@ -1,0 +1,207 @@
+<!-- Prev URL: https://survival8.blogspot.com/p/english-test-level-earth.html -->
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: window.location.protocol + "//" + window.location.hostname + "/p/personal-posts-menu.html",
+                success: function (result) {
+                    $("div.customTemporaryCodeHolder").html(result);
+                    $("nav.customDynamicNav").html(
+                        $("div.customTemporaryCodeHolder nav.customBitsWilpMenu").html()
+                    );
+                }
+            });
+
+            $.ajax({
+                url: window.location.protocol + "//" + window.location.hostname + "/p/follow-us-on-social-media.html",
+
+                success: function (result) {
+                    $("span.customTempCodeHolderForSocialMedia").html(result);
+                    $("div.customSocialMediaBtnsWrapper").html(
+                        $("span.customTempCodeHolderForSocialMedia div.customSocialMediaWrapper").html()
+                    );
+                }
+
+            });
+        });
+    </script>
+    <!-- Google AdSense Using Machine Learning Code -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3071098372371409",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <style>
+        .customTempCodeHolderForSocialMedia {
+            display: none;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+
+        i.ib {
+            color: blue;
+        }
+
+        i.ig {
+            color: green;
+        }
+
+        .customPre {
+            white-space: pre-wrap; 
+        }
+
+        .customLink {
+            background-color: #4CAF50;
+            border: none;
+            color: white !important;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .customLink:hover {
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<div class="customTemporaryCodeHolder"> </div>
+<span class="customTempCodeHolderForSocialMedia"> </span>
+
+<nav class="customDynamicNav"> </nav> <br />
+<div class="customSocialMediaBtnsWrapper"> </div> <br />
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <div class="customQuestion" ng-repeat="x in question_bank">
+        <h4>{{$index + 1}}) {{ x.questext }}</h4>
+        <input type="checkbox" name="custom_{{x.quesid}}" value="a">&nbsp;A.
+        <img ng-if="x.img_or_text == 0 || x.img_or_text == 2" src="{{x.optionimg_a}}"
+            style="width: 180px; height: 180px; display: block;">
+        <span ng-if="x.img_or_text == 1 || x.img_or_text == 2">{{x.optiontext_a}}</span>
+        <br>
+
+        <input type="checkbox" name="custom_{{x.quesid}}" value="b">&nbsp;B.
+        <img ng-if="x.img_or_text == 0 || x.img_or_text == 2" src="{{x.optionimg_b}}"
+            style="width: 180px; height: 180px; display: block;">
+        <span ng-if="x.img_or_text == 1 || x.img_or_text == 2">{{x.optiontext_b}}</span>
+        <br>
+
+        <input type="checkbox" name="custom_{{x.quesid}}" value="a">&nbsp;C.
+        <img ng-if="x.img_or_text == 0 || x.img_or_text == 2" src="{{x.optionimg_c}}"
+            style="width: 180px; height: 180px; display: block;">
+        <span ng-if="x.img_or_text == 1 || x.img_or_text == 2">{{x.optiontext_c}}</span>
+        <br>
+
+        <input type="checkbox" name="custom_{{x.quesid}}" value="a">&nbsp;D.
+        <img ng-if="x.img_or_text == 0 || x.img_or_text == 2" src="{{x.optionimg_d}}"
+            style="width: 180px; height: 180px; display: block;">
+        <span ng-if="x.img_or_text == 1 || x.img_or_text == 2">{{x.optiontext_d}}</span>
+        <br>
+
+        <span style="display: none;" class="answer_{{x.quesid}}">{{x.answers}}</span>
+        <button value="Submit" ng-click="checkAnswer(x.quesid)">Submit</button>
+        &nbsp;
+        <span class="result_{{x.quesid}}"></span>
+    </div>
+</body>
+
+<script>
+    var app = angular.module("myApp", []);
+    app.controller("myCtrl", function ($scope) {
+        $scope.question_bank = [
+            {
+                "quesid": "1",
+                "questext": "Which of these objects have names starting with 'A'?",
+
+                "optionimg_a": "https://1.bp.blogspot.com/-m9pqOZeFXfg/YSi43TRVTaI/AAAAAAAAHWY/659io0at70Adgt6TrJdLXsnD-yKR1LdigCLcBGAsYHQ/s479/apple.jpg",
+                /* https://1.bp.blogspot.com/-deyrxD65xOM/YSi1y5Y61nI/AAAAAAAAHV4/oxp2A0sQIqkr0axbyHSBa_WNaV2TMjZfwCLcBGAsYHQ/s612/apple.jpg */
+                "optionimg_b": "https://1.bp.blogspot.com/-CFmkydy7LyM/YSi1yyuJcrI/AAAAAAAAHV8/crWbKsfCUAsI-OpGUL5YkyONzistM1YfwCLcBGAsYHQ/s748/astronaut.jpg",
+                "optionimg_c": "https://1.bp.blogspot.com/-rwjc4uYjfok/YSi1zPN_HaI/AAAAAAAAHWA/greMh05pdnkIcasA0KLcr7PShcefq_1_gCLcBGAsYHQ/s1200/eskimo.jpg",
+                "optionimg_d": "https://1.bp.blogspot.com/-O5GnOk3j6fk/YSi1zSOgdlI/AAAAAAAAHWE/xM-A5-w5USU1vt3Hx-FstMsOYFkYgws_wCLcBGAsYHQ/s624/rocket.jpg",
+                
+                
+                "optiontext_a": "",
+                "optiontext_b": "",
+                "optiontext_c": "",
+                "optiontext_d": "",
+
+                "answers": "a,b",
+                "queslevel": "Pluto",
+                "img_or_text": 0
+            },
+
+            {
+                "quesid": "2",
+                "questext": "'____ there any difficulty in finding it?' Select all the possible answers.",
+
+                "optionimg_a": "",
+                "optionimg_b": "",
+                "optionimg_c": "",
+                "optionimg_d": "",
+
+                "optiontext_a": "Is",
+                "optiontext_b": "Was",
+                "optiontext_c": "Were",
+                "optiontext_d": "None of the above.",
+
+                "answers": "a,b",
+                "queslevel": "Earth",
+                "img_or_text": 1
+            },
+
+            {
+                "quesid": "3",
+                "questext": "'We _____ too late.' Select all the possible answers to fill the blank.",
+
+                "optionimg_a": "",
+                "optionimg_b": "",
+                "optionimg_c": "",
+                "optionimg_d": "",
+
+                "optiontext_a": "Was",
+                "optiontext_b": "Were",
+                "optiontext_c": "May be",
+                "optiontext_d": "None of the above.",
+
+                "answers": "b,c",
+                "queslevel": "Earth",
+                "img_or_text": 1
+            }
+        ]
+
+        $scope.checkAnswer = function (quesid) {
+            $scope.count++;
+            var selectedanwers = [];
+            $.each($("input[name='custom_" + quesid + "']:checked"), function () {
+                selectedanwers.push($(this).val());
+            });
+
+            var actualAnswers = $("span.answer_" + quesid).text().split(",");
+
+            if (selectedanwers.sort().join(',') === actualAnswers.sort().join(',')) {
+                $("span.result_" + quesid).text("Right answer!");
+            }
+            else {
+                $("span.result_" + quesid).text("Wrong answer! Try again!");
+
+            }
+        };
+    });
+</script>
+<span style="display: none;">Tags: Technology,JavaScript,Web Development,Communication Skills,</span>

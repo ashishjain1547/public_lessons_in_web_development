@@ -1,0 +1,138 @@
+<head>
+    <script crossorigin="anonymous" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: window.location.protocol + "//" + window.location.hostname + "/p/personal-posts-menu.html",
+                success: function (result) {
+                    $("div.customTemporaryCodeHolder").html(result);
+                    $("nav.customDynamicNav").html(
+                        $("div.customTemporaryCodeHolder nav.customBitsWilpMenu").html()
+                    );
+                }
+            });
+
+            $.ajax({
+                url: window.location.protocol + "//" + window.location.hostname + "/p/follow-us-on-social-media.html",
+
+                success: function (result) {
+                    $("span.customTempCodeHolderForSocialMedia").html(result);
+                    $("div.customSocialMediaBtnsWrapper").html(
+                        $("span.customTempCodeHolderForSocialMedia div.customSocialMediaWrapper").html()
+                    );
+                }
+
+            });
+        }); 
+    </script>
+    <!-- Google AdSense Using Machine Learning Code -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3071098372371409",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <style>
+        .customTempCodeHolderForSocialMedia {
+            display: none;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<div class="customTemporaryCodeHolder"> </div>
+<span class="customTempCodeHolderForSocialMedia"> </span>
+
+<nav class="customDynamicNav"> </nav> <br />
+<div class="customSocialMediaBtnsWrapper"> </div> <br />
+<!-- End of 'Personal Posts Menu Template For Copy-Paste'. It started from the top of the page from <HEAD> tag. -->
+
+<pre class=""><div class="separator" style="clear: both;"><a href="https://1.bp.blogspot.com/-BKWSnkMEvGE/YDXy6HlvXyI/AAAAAAAAGaY/N6yNQsymGJ4KFOe-KuwWO_QZN-2z9rf2wCLcBGAsYHQ/s0/Mozilla%2Bdocs%2Blogo.png" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" data-original-height="91" data-original-width="346" src="https://1.bp.blogspot.com/-BKWSnkMEvGE/YDXy6HlvXyI/AAAAAAAAGaY/N6yNQsymGJ4KFOe-KuwWO_QZN-2z9rf2wCLcBGAsYHQ/s0/Mozilla%2Bdocs%2Blogo.png"/></a></div>
+
+HTTP response status codes indicate whether a specific HTTP request has been successfully completed. Responses are grouped in five classes:
+
+1. Informational responses (100–199)
+2. Successful responses (200–299)
+3. Redirects (300–399)
+4. Client errors (400–499)
+5. Server errors (500–599)
+
+If you receive a response that is not in this list, it is a non-standard response, possibly custom to the server's software.
+
+Ref: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" class="" target="_blank">developer.mozilla.org</a>
+
+All HTTP response status codes are separated into five classes or categories. The first digit of the status code defines the class of response, while the last two digits do not have any classifying or categorization role. There are five classes defined by the standard:
+
+1xx informational response – the request was received, continuing process
+2xx successful – the request was successfully received, understood, and accepted
+3xx redirection – further action needs to be taken in order to complete the request
+4xx client error – the request contains bad syntax or cannot be fulfilled
+5xx server error – the server failed to fulfil an apparently valid request
+
+Ref: <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="" target="_blank">en.wikipedia.org</a>
+
+Some common error codes one must know:
+
+401 Unauthorized
+    Although the HTTP standard specifies "unauthorized", semantically this response means "unauthenticated". That is, the client must authenticate itself to get the requested response.
+
+403 Forbidden
+    The client does not have access rights to the content; that is, it is unauthorized, so the server is refusing to give the requested resource. Unlike 401, the client's identity is known to the server.
+
+405 Method Not Allowed
+    The request method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.
+
+415 Unsupported Media Type
+    The media format of the requested data is not supported by the server, so the server is rejecting the request.
+
+<h4>RESTful API Response Codes (used by Amazon Drive API)</h4>
+
+The HTTP Status Codes used by the RESTful Amazon Drive API.
+
+HTTP Status Code  ---  Description
+
+200 OK  ---  Successful.
+
+<b>201 Created  ---  Created.</b>
+Status code '201' is important for REST APIs that are performing some action such as raising a ticket or logging something.
+
+400 Bad Request  ---  Bad input parameter. Error message should indicate which one and why.
+
+401 Unauthorized  ---  The client passed in the invalid Auth token. Client should refresh the token and then try again.
+
+403 Forbidden  ---  * Customer doesn’t exist. * Application not registered. * Application try to access to properties not belong to an App. * Application try to trash/purge root node. * Application try to update contentProperties. * Operation is blocked (for third-party apps). * Customer account over quota.
+
+404 Not Found  ---  Resource not found.
+
+405 Method Not Allowed  ---  The resource doesn't support the specified HTTP verb.
+
+409 Conflict  ---  Conflict.
+
+411 Length Required  ---  The Content-Length header was not specified.
+
+412 Precondition Failed  ---  Precondition failed.
+
+429 Too Many Requests  ---  Too many request for rate limiting.
+
+500 Internal Server Error  ---  Servers are not working as expected. The request is probably valid but needs to be requested again later.
+
+503 Service Unavailable  ---  Service Unavailable.
+
+Ref: <a href="https://developer.amazon.com/docs/amazon-drive/ad-restful-api-response-codes.html" class="" target="_blank">developer.amazon.com (Dated: 24 Feb 2021)</a>
+
+<b class="">Additional Notes</b>
+
+In Europe, the NotFound project, created by multiple European organizations including Missing Children Europe and Child Focus, encourages site operators to add a snippet of code to serve customized 404 error pages which provide data about missing children.
+
+Ref: <a href="https://en.wikipedia.org/wiki/HTTP_404#Custom_error_pages" class="" target="_blank">HTTP 404</a>
+</pre> 
+<span class="" style="display: none;">Tags: Technology,Web Development,Web Scraping,Python</span>

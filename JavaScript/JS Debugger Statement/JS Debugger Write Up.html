@@ -1,0 +1,99 @@
+<head>
+    <script crossorigin="anonymous" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: window.location.protocol + "//" + window.location.hostname + "/p/personal-posts-menu.html",
+                success: function (result) {
+                    $("div.customTemporaryCodeHolder").html(result);
+                    $("nav.customDynamicNav").html(
+                        $("div.customTemporaryCodeHolder nav.customBitsWilpMenu").html()
+                    );
+                }
+            });
+
+            $.ajax({
+                url: window.location.protocol + "//" + window.location.hostname + "/p/follow-us-on-social-media.html",
+
+                success: function (result) {
+                    $("span.customTempCodeHolderForSocialMedia").html(result);
+                    $("div.customSocialMediaBtnsWrapper").html(
+                        $("span.customTempCodeHolderForSocialMedia div.customSocialMediaWrapper").html()
+                    );
+                }
+
+            });
+        }); 
+    </script>
+    <!-- Google AdSense Using Machine Learning Code -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3071098372371409",
+            enable_page_level_ads: true
+        });
+    </script>
+
+    <style>
+        .customTempCodeHolderForSocialMedia {
+            display: none;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<div class="customTemporaryCodeHolder"> </div>
+<span class="customTempCodeHolderForSocialMedia"> </span>
+
+<nav class="customDynamicNav"> </nav> <br />
+<div class="customSocialMediaBtnsWrapper"> </div> <br />
+<!-- End of 'Personal Posts Menu Template For Copy-Paste'. It started from the top of the page from <HEAD> tag. -->
+
+<pre>The debugger statement stops the execution of JavaScript, and calls (if available) the debugging function.
+
+Using the debugger statement has the same function as setting a breakpoint in the code.
+
+Normally, you activate debugging in your browser with the F12 key, and select "Console" in the debugger menu.
+
+Note: If no debugging is available, the debugger statement has no effect.
+
+- - -
+
+We have written this JS code in an HTML file:
+
+<i style="color: blue">
+&lt;script&gt;
+function outer(){
+    console.log("From outer")
+    inner()
+} 
+
+function inner(){
+    debugger;
+    console.log("From inner")
+    alert("Bye")
+}
+&lt;/script&gt;
+
+&lt;body onload="outer()"&gt; &lt;/body&gt;
+
+</i>
+
+- - -
+
+Following are the screenshots of "Firefox Debugger" when we run this code:
+
+<div class="separator" style="clear: both;"><a href="https://1.bp.blogspot.com/-83SuVnDQcXc/YCaEKjzNHbI/AAAAAAAAGWY/FKfiYgdkzGkLxnlvyZP-oDGH1UxeJNQSACLcBGAsYHQ/s567/Debugger%2Bview%2Bin%2BFirefox.png" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="600" data-original-height="402" data-original-width="567" src="https://1.bp.blogspot.com/-83SuVnDQcXc/YCaEKjzNHbI/AAAAAAAAGWY/FKfiYgdkzGkLxnlvyZP-oDGH1UxeJNQSACLcBGAsYHQ/s600/Debugger%2Bview%2Bin%2BFirefox.png"/></a></div>
+
+<div class="separator" style="clear: both;"><a href="https://1.bp.blogspot.com/-fqkESGw_U_I/YCaEKsAH8fI/AAAAAAAAGWc/3bKtvfiba88WY2IwiDE_USMjolKLUj-YwCLcBGAsYHQ/s421/Debugger%2Bview%2Bof%2Bcall%2Bstack.png" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" height="600" data-original-height="421" data-original-width="308" src="https://1.bp.blogspot.com/-fqkESGw_U_I/YCaEKsAH8fI/AAAAAAAAGWc/3bKtvfiba88WY2IwiDE_USMjolKLUj-YwCLcBGAsYHQ/s600/Debugger%2Bview%2Bof%2Bcall%2Bstack.png"/></a></div>
+
+When we would press on "Play" button in "Debugger", it will end on the last "alert()" statement.
+
+</pre>
